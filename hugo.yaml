@@ -1,0 +1,119 @@
+baseURL: "https://www.chadmullen.com/"
+languageCode: "en-us"
+title: "Chad Mullen"
+theme: "PaperMod"
+
+pagination:
+  pagerSize: 10
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  env: production
+  title: Chad Mullen
+  description: "AWS Solutions Architect writing about cloud architecture, AI/ML, and infrastructure modernization."
+  keywords: [AWS, Cloud Architecture, AI, ML, Solutions Architect, Serverless, Infrastructure]
+  author: Chad Mullen
+  
+  defaultTheme: light
+  disableThemeToggle: true
+  
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: false
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecialTitleCase: true
+  disableScrollToTop: false
+  
+  # Home page - show recent posts
+  homeInfoParams:
+    Title: "Hey, I'm Chad"
+    Content: >
+      AWS Solutions Architect writing about cloud architecture, AI/ML, 
+      and what I'm learning along the way.
+    imageUrl: "/images/profile.jpg"
+    imageWidth: 140
+    imageHeight: 140
+    imageTitle: "Chad Mullen"
+
+  # Social icons
+  socialIcons:
+    - name: linkedin
+      url: "https://www.linkedin.com/in/chadmullen"
+    - name: github
+      url: "https://github.com/chadmullen"
+    - name: rss
+      url: "/index.xml"
+
+  # For blog posts - discuss on LinkedIn
+  label:
+    text: "Chad Mullen"
+    icon: ""
+    iconHeight: 35
+
+  # Search
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+
+  assets:
+    disableHLJS: true
+    favicon: "/favicon.ico"
+    theme_color: "#FAFAF9"
+    msapplication_TileColor: "#FAFAF9"
+    
+  # Analytics - Cloudflare Web Analytics
+  # Replace YOUR_TOKEN with your actual Cloudflare token
+  analytics:
+    cloudflare:
+      token: "b6febae9a2514e928f92c2a3b838b9e9"
+
+# Enable search
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+    anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    lineNos: false
+    style: monokai
+
+menu:
+  main:
+    - identifier: blog
+      name: Blog
+      url: /posts/
+      weight: 10
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 20
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 30

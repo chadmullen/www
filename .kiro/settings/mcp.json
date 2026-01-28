@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "/opt/homebrew/opt/node@22/bin/npx",
+      "args": ["-y", "@executeautomation/playwright-mcp-server"],
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# Hugo
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/*.tfvars
+terraform/.terraform.lock.hcl
+terraform/crash.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local development
+node_modules/
+
+# Personal deployment docs
+docs/

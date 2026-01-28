@@ -1,0 +1,583 @@
+/* ==========================================================================
+   Chad Mullen Blog - Custom Theme
+   Typography: Source Serif Pro
+   Palette: Modern Warmth
+   ========================================================================== */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+/* ==========================================================================
+   CSS Variables - Light Mode (Default)
+   ========================================================================== */
+:root {
+  /* Modern Warmth Palette */
+  --background: #FAFAF9;
+  --primary-text: #18181B;
+  --secondary-text: #71717A;
+  --accent: #F59E0B;
+  --accent-hover: #D97706;
+  --border: #E4E4E7;
+  --code-bg: #F4F4F5;
+  --card-bg: #FFFFFF;
+  --selection-bg: rgba(245, 158, 11, 0.2);
+  
+  /* Typography */
+  --font-serif: 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  
+  /* PaperMod Variable Overrides */
+  --theme: var(--background);
+  --entry: var(--background);
+  --primary: var(--primary-text);
+  --secondary: var(--secondary-text);
+  --tertiary: var(--border);
+  --content: var(--primary-text);
+  --hljs-bg: var(--code-bg);
+  --code-bg: var(--code-bg);
+  --border: var(--border);
+}
+
+/* ==========================================================================
+   CSS Variables - Dark Mode
+   ========================================================================== */
+.dark {
+  --background: #1a1a1d;
+  --primary-text: #F5F5F5;
+  --secondary-text: #B0B0B0;
+  --accent: #F59E0B;
+  --accent-hover: #FBBF24;
+  --border: #2d2d30;
+  --code-bg: #252528;
+  --selection-bg: rgba(245, 158, 11, 0.3);
+  --card-bg: #232326;
+  
+  /* PaperMod Variable Overrides */
+  --theme: var(--background);
+  --entry: var(--card-bg);
+  --primary: var(--primary-text);
+  --secondary: var(--secondary-text);
+  --tertiary: var(--border);
+  --content: var(--primary-text);
+  --hljs-bg: var(--code-bg);
+}
+
+/* ==========================================================================
+   Base Typography
+   ========================================================================== */
+body {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--primary-text);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Text Selection */
+::selection {
+  background: var(--selection-bg);
+}
+
+::-moz-selection {
+  background: var(--selection-bg);
+}
+
+/* ==========================================================================
+   Headings
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6,
+.post-title,
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--primary-text);
+  line-height: 1.3;
+}
+
+h1, .post-title {
+  font-size: 2.25rem;
+}
+
+h2, .post-content h2 {
+  font-size: 1.75rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+h3, .post-content h3 {
+  font-size: 1.375rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+h4, .post-content h4 {
+  font-size: 1.125rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Post content links - subtle underline */
+.post-content a {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.post-content a:hover {
+  text-decoration-color: var(--accent-hover);
+}
+
+/* ==========================================================================
+   Navigation & Header
+   ========================================================================== */
+.nav {
+  font-family: var(--font-sans);
+}
+
+.logo a,
+.logo-switches {
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+
+#menu a {
+  color: var(--secondary-text);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+}
+
+#menu a:hover,
+#menu .active {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Homepage Hero Section
+   ========================================================================== */
+.home-hero {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem 3rem;
+  margin-bottom: 3rem;
+}
+
+.home-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.home-hero-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.home-hero-content {
+  flex: 1;
+}
+
+.home-hero-content h1 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-text);
+}
+
+.home-hero-content p {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--secondary-text);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.home-hero-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.home-hero-social a {
+  color: var(--secondary-text);
+  transition: color 0.2s ease;
+}
+
+.home-hero-social a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Homepage Recent Posts
+   ========================================================================== */
+.home-posts {
+  margin-top: 2rem;
+}
+
+.home-posts-title {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--secondary-text);
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-post-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-post-item:last-child {
+  border-bottom: none;
+}
+
+.home-post-item a {
+  text-decoration: none;
+  display: block;
+}
+
+.home-post-item h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-text);
+  margin: 0 0 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.home-post-item a:hover h3 {
+  color: var(--accent);
+}
+
+.home-post-summary {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--secondary-text);
+  margin: 0 0 0.25rem 0;
+  line-height: 1.5;
+}
+
+.home-post-meta {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+/* Responsive homepage */
+@media (max-width: 640px) {
+  .home-hero {
+    padding: 2rem 1.5rem;
+  }
+  
+  .home-hero-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .home-hero-img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .home-hero-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .home-hero-social {
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Post List (Homepage & Archive)
+   ========================================================================== */
+.post-entry {
+  border: none;
+  background: none;
+  margin-bottom: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-entry:last-child {
+  border-bottom: none;
+}
+
+.post-entry:first-child {
+  padding-top: 0;
+}
+
+.entry-header h2 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.entry-header h2 a {
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
+.entry-header h2 a:hover {
+  color: var(--accent);
+}
+
+.entry-content {
+  color: var(--secondary-text);
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.entry-footer {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+/* ==========================================================================
+   Post Content
+   ========================================================================== */
+.post-content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.post-content p {
+  margin-bottom: 1.5rem;
+}
+
+/* Blockquotes */
+.post-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--secondary-text);
+}
+
+/* Lists */
+.post-content ul,
+.post-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Code
+   ========================================================================== */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+pre {
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.post-content th,
+.post-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.post-content th {
+  background: var(--code-bg);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  font-family: var(--font-sans);
+  color: var(--secondary-text);
+  font-size: 0.875rem;
+}
+
+.footer a {
+  color: var(--secondary-text);
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+/* Social icons */
+.social-icons a {
+  color: var(--secondary-text);
+  transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Post Meta
+   ========================================================================== */
+.post-meta {
+  font-family: var(--font-sans);
+  color: var(--secondary-text);
+  font-size: 0.875rem;
+}
+
+/* Tags */
+.post-tags a {
+  font-family: var(--font-sans);
+  background: var(--code-bg);
+  color: var(--secondary-text);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.post-tags a:hover {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/* ==========================================================================
+   Search
+   ========================================================================== */
+#searchbox input {
+  font-family: var(--font-sans);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+#searchbox input:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--selection-bg);
+}
+
+/* ==========================================================================
+   Breadcrumbs
+   ========================================================================== */
+.breadcrumbs {
+  font-family: var(--font-sans);
+  color: var(--secondary-text);
+  font-size: 0.875rem;
+}
+
+.breadcrumbs a {
+  color: var(--secondary-text);
+}
+
+.breadcrumbs a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Reading Progress & Misc
+   ========================================================================== */
+.progress {
+  background: var(--accent);
+}
+
+/* Scroll to top button */
+#top-link {
+  background: var(--accent);
+  color: var(--background);
+}
+
+#top-link:hover {
+  background: var(--accent-hover);
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+  
+  h1, .post-title {
+    font-size: 1.75rem;
+  }
+  
+  h2, .post-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .post-content {
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+}

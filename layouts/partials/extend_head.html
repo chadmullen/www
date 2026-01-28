@@ -1,0 +1,42 @@
+<!-- Preconnect to Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Cloudflare Web Analytics -->
+<!-- Replace YOUR_CLOUDFLARE_TOKEN with your actual token from Cloudflare dashboard -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b6febae9a2514e928f92c2a3b838b9e9"}'></script>
+
+<!-- Mermaid for diagrams -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose'
+  });
+</script>
+
+<style>
+  /* Hide the code block, show the mermaid div */
+  pre:has(code.language-mermaid) {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  
+  code.language-mermaid {
+    display: none;
+  }
+  
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+  
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

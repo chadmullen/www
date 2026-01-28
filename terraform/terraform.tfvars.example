@@ -1,0 +1,7 @@
+# Terraform variables for chadmullen.com blog
+# Copy this file to terraform.tfvars and fill in your values
+
+aws_region            = "us-east-1"
+domain_name           = "chadmullen.com"
+monthly_budget_amount = 10
+alert_email           = "your-email@example.com"
