@@ -177,6 +177,10 @@ resource "aws_cloudfront_distribution" "site" {
     target_origin_id       = "S3-${var.domain_name}"
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.apex_redirect.arn
+    }
 
     forwarded_values {
       query_string = false
@@ -225,8 +229,8 @@ resource "aws_cloudfront_distribution" "site" {
 # CloudFront Function for www redirect
 # -----------------------------------------------------------------------------
 
-resource "aws_cloudfront_function" "www_redirect" {
-  name    = "www-redirect-${replace(var.domain_name, ".", "-")}"
+resource "aws_cloudfront_function" "apex_redirect" {
+  name    = "apex-redirect-${replace(var.domain_name, ".", "-")}"
   runtime = "cloudfront-js-2.0"
   publish = true
   code    = <<-EOF
@@ -234,12 +238,12 @@ resource "aws_cloudfront_function" "www_redirect" {
       var request = event.request;
       var host = request.headers.host.value;
       
-      if (host.startsWith('www.')) {
+      if (host === '${var.domain_name}') {
         return {
           statusCode: 301,
           statusDescription: 'Moved Permanently',
           headers: {
-            location: { value: 'https://${var.domain_name}' + request.uri }
+            location: { value: 'https://www.${var.domain_name}' + request.uri }
           }
         };
       }
@@ -275,7 +279,7 @@ resource "aws_iam_role" "github_actions" {
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:chadmullen/chadmullen-blog:*"
+            "token.actions.githubusercontent.com:sub" = "repo:chadmullen/www:*"
           }
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
