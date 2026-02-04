@@ -2,7 +2,7 @@
 title: "Building a Static Blog on AWS: The Architecture"
 date: 2025-01-28
 draft: false
-summary: "A walkthrough of hosting a Hugo blog on S3 and CloudFront—simple, cheap, and fast."
+summary: "A walkthrough of hosting a Hugo blog on S3 and CloudFront—simple, inexpensive, and fast."
 tags: ["AWS", "CloudFront", "S3", "Hugo", "Architecture"]
 ---
 
