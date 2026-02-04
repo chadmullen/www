@@ -1,4 +1,10 @@
-# Build to Certify: 6 Months, 24 Projects, One AWS GenAI Certification
+---
+title: "Build to Certify: 6 Months, 24 Projects, One AWS GenAI Certification"
+date: 2026-02-04
+draft: false
+summary: "My 6-month plan to pass the AWS Certified Generative AI Developer – Professional exam by building 24 real projects in public."
+tags: ["AWS", "Bedrock", "GenAI", "Certification", "AIP-C01"]
+---
 
 The AWS Certified Generative AI Developer – Professional (AIP-C01) exam dropped in November 2025, and it's the real deal. Not a foundational "do you know what a prompt is" certification — this one validates whether you can actually build production GenAI systems on AWS. Vector stores, RAG pipelines, agentic architectures, guardrails, cost optimization, the works.
 
