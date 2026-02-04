@@ -18,9 +18,15 @@ The AIP-C01 exam guide reads like a blueprint for modern GenAI development: foun
 
 Building in public adds accountability. It also means anyone following this series gets working code, not just theory. Every week ships a GitHub repo you can fork and deploy.
 
+## How I'm Building
+
+I'm using AI tooling throughout this series — Kiro is the IDE of choice, using the latest Claude models (Sonnet, Opus) for architecture decisions and code generation. This isn't about proving I can do it the hard way. It's about building the way modern development teams actually work: AI-assisted, iterative, shipping faster.
+
+If you're following along, expect to see prompts, agent interactions, and the occasional "Claude wrote this, I refined it" honesty. The goal is real output, not purity points.
+
 ## The 6-Month Plan
 
-I've mapped 25 weekly posts directly to the five exam domains, weighted by how much each domain contributes to the exam:
+I've mapped ~25 weekly posts directly to the five exam domains, weighted by how much each domain contributes to the exam:
 
 | Domain | Weight | Weeks |
 |--------|--------|-------|
