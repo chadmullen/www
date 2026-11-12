@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" role="img" aria-labelledby="t d" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <title id="t">Control plane and execution plane for hot-reloaded data quality rules</title>
+  <desc id="d">In the control plane, definitions in Git (rules, mappings and reference data) are validated and compiled into a versioned rule package, which is published to a Kafka metadata topic. In the execution plane, Apache Flink reads raw telemetry from Kafka, harmonizes each source into a canonical record, then a quality operator keyed per device validates, detects patterns, repairs and scores each record. The metadata topic is broadcast to both operators so new rules apply without a restart. Every record exits to one of three streams: curated, quarantine or dead-letter.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52525B"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#18181B" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .lane { fill: #F4F4F5; }
+      .lane-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; fill: #71717A; }
+      .card { fill: #FFFFFF; stroke: #E4E4E7; stroke-width: 1; filter: url(#shadow); }
+      .title { font-size: 15px; font-weight: 600; fill: #18181B; }
+      .sub { font-size: 12px; fill: #71717A; }
+      .chip { fill: #F4F4F5; stroke: #E4E4E7; }
+      .chip-text { font-size: 11px; fill: #3F3F46; }
+      .flow { stroke: #52525B; stroke-width: 1.5; fill: none; }
+      .flow-dash { stroke: #D97706; stroke-width: 1.75; fill: none; stroke-dasharray: 5 4; }
+      .edge-label { font-size: 11.5px; fill: #3F3F46; }
+      .accent-label { font-size: 11.5px; font-weight: 600; fill: #B45309; }
+    </style>
+  </defs>
+
+  <!-- Lanes -->
+  <rect class="lane" x="12" y="16" width="310" height="508" rx="14"/>
+  <text class="lane-label" x="32" y="42">CONTROL PLANE · CONFIG AS CODE</text>
+  <rect class="lane" x="552" y="16" width="436" height="508" rx="14"/>
+  <text class="lane-label" x="572" y="42">EXECUTION PLANE · APACHE FLINK</text>
+
+  <!-- Control plane -->
+  <rect class="card" x="32" y="64" width="270" height="96" rx="10"/>
+  <rect x="32" y="64" width="5" height="96" rx="2" fill="#18181B"/>
+  <text class="title" x="52" y="91">Definitions in Git</text>
+  <text class="sub" x="52" y="111">owned by data stewards</text>
+  <rect class="chip" x="52" y="124" width="70" height="24" rx="6"/><text class="chip-text" x="64" y="140">rules</text>
+  <rect class="chip" x="128" y="124" width="76" height="24" rx="6"/><text class="chip-text" x="140" y="140">mappings</text>
+  <rect class="chip" x="210" y="124" width="78" height="24" rx="6"/><text class="chip-text" x="222" y="140">ref data</text>
+
+  <rect class="card" x="32" y="196" width="270" height="70" rx="10"/>
+  <rect x="32" y="196" width="5" height="70" rx="2" fill="#18181B"/>
+  <text class="title" x="52" y="225">Validate + compile</text>
+  <text class="sub" x="52" y="245">bad rules never reach the stream</text>
+
+  <rect class="card" x="32" y="306" width="270" height="70" rx="10"/>
+  <rect x="32" y="306" width="5" height="70" rx="2" fill="#18181B"/>
+  <text class="title" x="52" y="335">Rule package vN</text>
+  <text class="sub" x="52" y="355">versioned, recorded on every output</text>
+
+  <path class="flow" d="M167,160 L167,192" marker-end="url(#arrow)"/>
+  <path class="flow" d="M167,266 L167,302" marker-end="url(#arrow)"/>
+
+  <!-- Kafka -->
+  <rect class="card" x="352" y="140" width="180" height="80" rx="10"/>
+  <rect x="352" y="140" width="5" height="80" rx="2" fill="#8C4FFF"/>
+  <text class="title" x="372" y="172">Kafka</text>
+  <text class="sub" x="372" y="192">raw telemetry</text>
+
+  <rect class="card" x="352" y="306" width="180" height="70" rx="10"/>
+  <rect x="352" y="306" width="5" height="70" rx="2" fill="#8C4FFF"/>
+  <text class="title" x="372" y="335">Kafka</text>
+  <text class="sub" x="372" y="355">metadata topic</text>
+
+  <path class="flow" d="M302,341 L348,341" marker-end="url(#arrow)"/>
+  <text class="edge-label" x="325" y="331" text-anchor="middle">publish</text>
+
+  <!-- Execution plane -->
+  <rect class="card" x="572" y="140" width="396" height="80" rx="10"/>
+  <rect x="572" y="140" width="5" height="80" rx="2" fill="#E7157B"/>
+  <text class="title" x="592" y="172">Harmonize</text>
+  <text class="sub" x="592" y="192">each source's shape → one canonical record</text>
+
+  <rect class="card" x="572" y="286" width="396" height="110" rx="10"/>
+  <rect x="572" y="286" width="5" height="110" rx="2" fill="#E7157B"/>
+  <text class="title" x="592" y="314">Quality</text>
+  <text class="sub" x="592" y="334">keyed per device · history survives rule updates</text>
+  <rect class="chip" x="592" y="352" width="70" height="28" rx="6"/><text class="chip-text" x="604" y="370">validate</text>
+  <rect class="chip" x="668" y="352" width="148" height="28" rx="6"/><text class="chip-text" x="680" y="370">flatline · duplicate · drift</text>
+  <rect class="chip" x="822" y="352" width="60" height="28" rx="6"/><text class="chip-text" x="834" y="370">repair</text>
+  <rect class="chip" x="888" y="352" width="60" height="28" rx="6"/><text class="chip-text" x="900" y="370">score</text>
+
+  <path class="flow" d="M532,170 L568,170" marker-end="url(#arrow)"/>
+  <path class="flow" d="M770,220 L770,282" marker-end="url(#arrow)"/>
+
+  <!-- Broadcast (hot reload) -->
+  <path class="flow-dash" d="M532,326 L548,326 L548,200 L568,200" marker-end="url(#arrow)"/>
+  <path class="flow-dash" d="M532,356 L568,356" marker-end="url(#arrow)"/>
+  <text class="accent-label" x="442" y="400" text-anchor="middle">broadcast · hot reload</text>
+  <text class="edge-label" x="442" y="418" text-anchor="middle">no restart, no lost state</text>
+
+  <!-- Outputs -->
+  <rect class="card" x="572" y="432" width="124" height="72" rx="10"/>
+  <rect x="572" y="432" width="5" height="72" rx="2" fill="#7AA116"/>
+  <text class="title" x="590" y="462">curated</text>
+  <text class="sub" x="590" y="482">trusted, scored</text>
+
+  <rect class="card" x="708" y="432" width="124" height="72" rx="10"/>
+  <rect x="708" y="432" width="5" height="72" rx="2" fill="#F59E0B"/>
+  <text class="title" x="726" y="462">quarantine</text>
+  <text class="sub" x="726" y="482">failed checks</text>
+
+  <rect class="card" x="844" y="432" width="124" height="72" rx="10"/>
+  <rect x="844" y="432" width="5" height="72" rx="2" fill="#DD344C"/>
+  <text class="title" x="862" y="462">dead-letter</text>
+  <text class="sub" x="862" y="482">unprocessable</text>
+
+  <path class="flow" d="M634,396 L634,428" marker-end="url(#arrow)"/>
+  <path class="flow" d="M770,396 L770,428" marker-end="url(#arrow)"/>
+  <path class="flow" d="M906,396 L906,428" marker-end="url(#arrow)"/>
+</svg>

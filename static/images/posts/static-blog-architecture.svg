@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-labelledby="t d" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <title id="t">Architecture of www.chadmullen.com</title>
+  <desc id="d">Serving path: a reader's browser resolves the domain with Route 53, then requests the page over HTTPS from CloudFront, which terminates TLS with an ACM certificate, redirects the apex domain to www with a CloudFront Function, and on a cache miss reads from a private S3 bucket through Origin Access Control. Publishing path: a push to the main branch triggers GitHub Actions, which builds the site with Hugo, assumes a repo-scoped IAM role through OIDC with no stored keys, syncs the files to S3 and invalidates the CloudFront cache. AWS Budgets and Cost Anomaly Detection guard spend.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52525B"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#18181B" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .lane { fill: #F4F4F5; }
+      .lane-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; fill: #71717A; }
+      .card { fill: #FFFFFF; stroke: #E4E4E7; stroke-width: 1; filter: url(#shadow); }
+      .title { font-size: 15px; font-weight: 600; fill: #18181B; }
+      .sub { font-size: 12px; fill: #71717A; }
+      .chip { fill: #F4F4F5; stroke: #E4E4E7; }
+      .chip-text { font-size: 11px; fill: #3F3F46; }
+      .flow { stroke: #52525B; stroke-width: 1.5; fill: none; }
+      .flow-dash { stroke: #52525B; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+      .step { fill: #F59E0B; }
+      .step-text { font-size: 11px; font-weight: 600; fill: #FFFFFF; }
+      .edge-label { font-size: 11.5px; fill: #3F3F46; }
+      .mono { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 11px; fill: #3F3F46; }
+      .foot { font-size: 12px; fill: #71717A; }
+    </style>
+  </defs>
+
+  <!-- Lanes -->
+  <rect class="lane" x="12" y="16" width="976" height="292" rx="14"/>
+  <text class="lane-label" x="32" y="42">SERVING · EVERY PAGE VIEW</text>
+  <rect class="lane" x="12" y="324" width="976" height="208" rx="14"/>
+  <text class="lane-label" x="32" y="350">PUBLISHING · EVERY PUSH TO MAIN</text>
+
+  <!-- Reader -->
+  <rect class="card" x="36" y="176" width="140" height="72" rx="10"/>
+  <text class="title" x="56" y="207">Reader</text>
+  <text class="sub" x="56" y="227">web browser</text>
+
+  <!-- Route 53 -->
+  <rect class="card" x="262" y="62" width="250" height="62" rx="10"/>
+  <rect x="262" y="62" width="5" height="62" rx="2" fill="#8C4FFF"/>
+  <text class="title" x="282" y="89">Route 53</text>
+  <text class="sub" x="282" y="109">ALIAS records for apex + www</text>
+
+  <!-- CloudFront -->
+  <rect class="card" x="262" y="150" width="400" height="132" rx="10"/>
+  <rect x="262" y="150" width="5" height="132" rx="2" fill="#8C4FFF"/>
+  <text class="title" x="282" y="178">CloudFront</text>
+  <text class="sub" x="282" y="198">global edge cache · HTTPS only</text>
+  <rect class="chip" x="282" y="222" width="122" height="40" rx="6"/>
+  <text class="chip-text" x="294" y="238">TLS certificate</text>
+  <text class="chip-text" x="294" y="253">ACM · us-east-1</text>
+  <rect class="chip" x="412" y="222" width="132" height="40" rx="6"/>
+  <text class="chip-text" x="424" y="238">CloudFront Function</text>
+  <text class="chip-text" x="424" y="253">apex → www (301)</text>
+  <rect class="chip" x="552" y="222" width="98" height="40" rx="6"/>
+  <text class="chip-text" x="562" y="238">Price class 100</text>
+  <text class="chip-text" x="562" y="253">NA + EU edges</text>
+
+  <!-- S3 -->
+  <rect class="card" x="742" y="150" width="222" height="132" rx="10"/>
+  <rect x="742" y="150" width="5" height="132" rx="2" fill="#7AA116"/>
+  <text class="title" x="762" y="178">S3 bucket</text>
+  <text class="sub" x="762" y="198">private origin · no public URL</text>
+  <rect class="chip" x="762" y="222" width="88" height="40" rx="6"/>
+  <text class="chip-text" x="774" y="238">Public access</text>
+  <text class="chip-text" x="774" y="253">blocked</text>
+  <rect class="chip" x="858" y="222" width="90" height="40" rx="6"/>
+  <text class="chip-text" x="870" y="238">Versioned</text>
+  <text class="chip-text" x="870" y="253">+ encrypted</text>
+
+  <!-- Serving flows -->
+  <path class="flow-dash" d="M176,196 C220,196 222,93 258,93" marker-end="url(#arrow)"/>
+  <circle class="step" cx="214" cy="140" r="10"/><text class="step-text" x="214" y="144" text-anchor="middle">1</text>
+  <text class="edge-label" x="198" y="144" text-anchor="end">DNS</text>
+
+  <path class="flow" d="M176,228 L258,228" marker-end="url(#arrow)"/>
+  <circle class="step" cx="217" cy="228" r="10"/><text class="step-text" x="217" y="232" text-anchor="middle">2</text>
+  <text class="edge-label" x="217" y="262" text-anchor="middle">HTTPS</text>
+
+  <path class="flow" d="M662,200 L738,200" marker-end="url(#arrow)"/>
+  <circle class="step" cx="700" cy="200" r="10"/><text class="step-text" x="700" y="204" text-anchor="middle">3</text>
+  <text class="edge-label" x="700" y="182" text-anchor="middle">cache miss</text>
+  <text class="edge-label" x="700" y="226" text-anchor="middle">via OAC</text>
+
+  <!-- git push -->
+  <rect class="card" x="36" y="398" width="140" height="72" rx="10"/>
+  <rect x="36" y="398" width="5" height="72" rx="2" fill="#18181B"/>
+  <text class="title" x="56" y="429">git push</text>
+  <text class="sub" x="56" y="449">to main</text>
+
+  <!-- GitHub Actions -->
+  <rect class="card" x="262" y="376" width="220" height="116" rx="10"/>
+  <rect x="262" y="376" width="5" height="116" rx="2" fill="#18181B"/>
+  <text class="title" x="282" y="404">GitHub Actions</text>
+  <text class="sub" x="282" y="424">build + deploy workflow</text>
+  <rect class="chip" x="282" y="440" width="182" height="34" rx="6"/>
+  <text class="mono" x="294" y="461">hugo --minify</text>
+
+  <!-- IAM role -->
+  <rect class="card" x="542" y="376" width="240" height="116" rx="10"/>
+  <rect x="542" y="376" width="5" height="116" rx="2" fill="#DD344C"/>
+  <text class="title" x="562" y="404">IAM role via OIDC</text>
+  <text class="sub" x="562" y="424">no stored AWS keys</text>
+  <rect class="chip" x="562" y="440" width="204" height="34" rx="6"/>
+  <text class="chip-text" x="574" y="461">this repo only · S3 + invalidate</text>
+
+  <!-- Publishing flows -->
+  <path class="flow" d="M176,434 L258,434" marker-end="url(#arrow)"/>
+  <circle class="step" cx="217" cy="434" r="10"/><text class="step-text" x="217" y="438" text-anchor="middle">A</text>
+
+  <path class="flow" d="M482,434 L538,434" marker-end="url(#arrow)"/>
+  <circle class="step" cx="510" cy="434" r="10"/><text class="step-text" x="510" y="438" text-anchor="middle">B</text>
+  <text class="edge-label" x="510" y="462" text-anchor="middle">assume</text>
+
+  <path class="flow" d="M612,376 L612,286" marker-end="url(#arrow)"/>
+  <circle class="step" cx="612" cy="330" r="10"/><text class="step-text" x="612" y="334" text-anchor="middle">D</text>
+  <text class="mono" x="626" y="318">invalidate /*</text>
+
+  <path class="flow" d="M782,434 L853,434 L853,286" marker-end="url(#arrow)"/>
+  <circle class="step" cx="853" cy="372" r="10"/><text class="step-text" x="853" y="376" text-anchor="middle">C</text>
+  <text class="mono" x="867" y="376">s3 sync --delete</text>
+
+  <!-- Footer -->
+  <text class="foot" x="32" y="566">Guardrails: AWS Budgets alert + Cost Anomaly Detection · everything in Terraform · under $1/month at blog traffic</text>
+</svg>

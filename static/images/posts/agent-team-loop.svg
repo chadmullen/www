@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" role="img" aria-labelledby="t d" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <title id="t">The orchestrated agent loop</title>
+  <desc id="d">A human supervisor sits above the loop and owns direction, approvals and tie-breaks. The orchestrator runs six steps: decompose the goal into scoped tasks, grill the plan with the grill-me skill, dispatch specialist workers in parallel, integrate their reports, send the integrated diff to a different model for adversarial review, then harden and verify against the success criteria in AGENTS.md. Review findings loop back to integration.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52525B"/>
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#18181B" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .lane { fill: #F4F4F5; }
+      .lane-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; fill: #71717A; }
+      .card { fill: #FFFFFF; stroke: #E4E4E7; stroke-width: 1; filter: url(#shadow); }
+      .title { font-size: 15px; font-weight: 600; fill: #18181B; }
+      .sub { font-size: 12px; fill: #71717A; }
+      .chip { fill: #F4F4F5; stroke: #E4E4E7; }
+      .chip-text { font-size: 11px; fill: #3F3F46; }
+      .flow { stroke: #52525B; stroke-width: 1.5; fill: none; }
+      .flow-dash { stroke: #D97706; stroke-width: 1.75; fill: none; stroke-dasharray: 5 4; }
+      .step { fill: #F59E0B; }
+      .step-text { font-size: 11px; font-weight: 600; fill: #FFFFFF; }
+      .accent-label { font-size: 11.5px; font-weight: 600; fill: #B45309; }
+      .sup { fill: #18181B; }
+      .sup-title { font-size: 14px; font-weight: 600; fill: #FAFAF9; }
+      .sup-sub { font-size: 12px; fill: #D4D4D8; }
+    </style>
+  </defs>
+
+  <!-- Supervisor -->
+  <rect class="sup" x="12" y="16" width="976" height="52" rx="12"/>
+  <text class="sup-title" x="32" y="47">Supervisor: me</text>
+  <text class="sup-sub" x="160" y="47">direction · approvals · tie-breaks</text>
+
+  <rect class="lane" x="12" y="84" width="976" height="370" rx="14"/>
+  <text class="lane-label" x="32" y="110">ORCHESTRATOR LOOP · CLAUDE CODE</text>
+
+  <!-- Row 1 -->
+  <rect class="card" x="32" y="128" width="284" height="116" rx="10"/>
+  <circle class="step" cx="56" cy="154" r="11"/><text class="step-text" x="56" y="158" text-anchor="middle">1</text>
+  <text class="title" x="76" y="159">Decompose</text>
+  <text class="sub" x="52" y="186">split the goal into independent,</text>
+  <text class="sub" x="52" y="204">well-scoped tasks</text>
+
+  <rect class="card" x="358" y="128" width="284" height="116" rx="10"/>
+  <circle class="step" cx="382" cy="154" r="11"/><text class="step-text" x="382" y="158" text-anchor="middle">2</text>
+  <text class="title" x="402" y="159">Grill the plan</text>
+  <text class="sub" x="378" y="186">grill-me skill finds the holes</text>
+  <text class="sub" x="378" y="204">before any code exists</text>
+
+  <rect class="card" x="684" y="128" width="284" height="116" rx="10"/>
+  <circle class="step" cx="708" cy="154" r="11"/><text class="step-text" x="708" y="158" text-anchor="middle">3</text>
+  <text class="title" x="728" y="159">Dispatch in parallel</text>
+  <text class="sub" x="704" y="186">one specialist per task</text>
+  <rect class="chip" x="704" y="202" width="36" height="24" rx="6"/><text class="chip-text" x="714" y="218">db</text>
+  <rect class="chip" x="746" y="202" width="38" height="24" rx="6"/><text class="chip-text" x="755" y="218">api</text>
+  <rect class="chip" x="790" y="202" width="34" height="24" rx="6"/><text class="chip-text" x="800" y="218">ai</text>
+  <rect class="chip" x="830" y="202" width="38" height="24" rx="6"/><text class="chip-text" x="840" y="218">iac</text>
+  <rect class="chip" x="874" y="202" width="74" height="24" rx="6"/><text class="chip-text" x="884" y="218">sec · test</text>
+
+  <!-- Row 2 (right to left) -->
+  <rect class="card" x="684" y="304" width="284" height="116" rx="10"/>
+  <circle class="step" cx="708" cy="330" r="11"/><text class="step-text" x="708" y="334" text-anchor="middle">4</text>
+  <text class="title" x="728" y="335">Integrate</text>
+  <text class="sub" x="704" y="362">each worker reports: files changed,</text>
+  <text class="sub" x="704" y="380">how it verified, open questions</text>
+
+  <rect class="card" x="358" y="304" width="284" height="116" rx="10"/>
+  <rect x="358" y="304" width="5" height="116" rx="2" fill="#D97706"/>
+  <circle class="step" cx="382" cy="330" r="11"/><text class="step-text" x="382" y="334" text-anchor="middle">5</text>
+  <text class="title" x="402" y="335">Adversarial review</text>
+  <text class="sub" x="378" y="362">a different model family</text>
+  <text class="sub" x="378" y="380">red-teams the integrated diff</text>
+
+  <rect class="card" x="32" y="304" width="284" height="116" rx="10"/>
+  <circle class="step" cx="56" cy="330" r="11"/><text class="step-text" x="56" y="334" text-anchor="middle">6</text>
+  <text class="title" x="76" y="335">Harden + verify</text>
+  <text class="sub" x="52" y="362">test · lint · terraform plan, then check</text>
+  <text class="sub" x="52" y="380">success criteria in AGENTS.md</text>
+
+  <!-- Flow -->
+  <path class="flow" d="M316,186 L354,186" marker-end="url(#arrow)"/>
+  <path class="flow" d="M642,186 L680,186" marker-end="url(#arrow)"/>
+  <path class="flow" d="M826,244 L826,300" marker-end="url(#arrow)"/>
+  <path class="flow" d="M684,346 L646,346" marker-end="url(#arrow)"/>
+  <path class="flow" d="M358,362 L320,362" marker-end="url(#arrow)"/>
+
+  <!-- Findings loop -->
+  <path class="flow-dash" d="M500,420 L500,438 L860,438 L860,424" marker-end="url(#arrow-accent)"/>
+  <text class="accent-label" x="680" y="432" text-anchor="middle">findings go back to the team</text>
+</svg>
