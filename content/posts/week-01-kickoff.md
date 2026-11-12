@@ -97,4 +97,6 @@ Let's go!
 
 ---
 
-*This is Week 1 of the Build to Certify series. Follow the [GitHub repo](https://github.com/chadmullen/aip-c01-study-plan) for code and the blog for weekly posts. Next up: [Week 2 — Choosing the Right FM: Building a Model Comparison Dashboard](/week-02-fm-comparison-dashboard).*
+*This is Week 1 of the Build to Certify series. Follow the [GitHub repo](https://github.com/chadmullen/aip-c01-study-plan) for code.*
+
+*Update, November 2026: Week 2 never shipped. Here's [what happened, and what I built instead](/posts/2026-the-weekly-posts-didnt-happen/).*

@@ -21,29 +21,9 @@ I chose [Hugo](https://gohugo.io/) for the generator—it's fast, has great them
 
 ## The Architecture
 
-Here's the production serving infrastructure:
+Here's the whole thing: how a page gets to you, and how a new post gets published.
 
-```mermaid
-flowchart TB
-    User([User Browser])
-    DNS[Route 53<br/>DNS]
-    CDN[CloudFront<br/>CDN + SSL]
-    Cert[ACM Certificate<br/>us-east-1]
-    Storage[S3 Bucket<br/>Static Files]
-    
-    User -->|1. DNS lookup| DNS
-    DNS -->|2. Returns CloudFront domain| User
-    User -->|3. HTTPS request| CDN
-    Cert -.->|SSL/TLS| CDN
-    CDN -->|4. Fetch if not cached| Storage
-    CDN -->|5. Cached response| User
-    
-    style User fill:#e1f5ff
-    style CDN fill:#ff9900
-    style Storage fill:#569a31
-    style DNS fill:#8c4fff
-    style Cert fill:#dd344c
-```
+![Architecture of this blog. Serving: the browser resolves DNS with Route 53, requests the page over HTTPS from CloudFront (ACM certificate in us-east-1, a CloudFront Function that redirects the apex domain to www), and on a cache miss CloudFront reads from a private S3 bucket through Origin Access Control. Publishing: a push to main triggers GitHub Actions, which builds with Hugo, assumes a repo-scoped IAM role through OIDC, syncs to S3 and invalidates the CloudFront cache.](/images/posts/static-blog-architecture.svg)
 
 ### Components
 
