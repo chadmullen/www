@@ -10,11 +10,39 @@
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
   
-  mermaid.initialize({ 
-    startOnLoad: true,
-    theme: 'default',
-    securityLevel: 'loose'
+  // Match the site's "Modern Warmth" palette instead of mermaid's default blue/purple.
+  // Render only after web fonts load, so mermaid measures labels in Inter
+  // (measuring in the fallback font is what clipped labels before).
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    securityLevel: 'strict',
+    themeVariables: {
+      fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      fontSize: '14px',
+      background: '#FAFAF9',
+      primaryColor: '#FFFFFF',
+      primaryTextColor: '#18181B',
+      primaryBorderColor: '#D4D4D8',
+      secondaryColor: '#F4F4F5',
+      tertiaryColor: '#F4F4F5',
+      lineColor: '#52525B',
+      textColor: '#18181B',
+      clusterBkg: '#F4F4F5',
+      clusterBorder: '#E4E4E7',
+      edgeLabelBackground: '#FAFAF9'
+    },
+    flowchart: { curve: 'step', padding: 16, nodeSpacing: 40, rankSpacing: 48 }
   });
+  const render = () => Promise.all([
+      document.fonts.load("400 14px Inter"),
+      document.fonts.load("600 14px Inter")
+    ]).catch(() => {}).then(() => mermaid.run({ querySelector: '.mermaid' }));
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', render);
+  } else {
+    render();
+  }
 </script>
 
 <style>
