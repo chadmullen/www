@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" role="img" aria-labelledby="t d" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <title id="t">Enterprise Open WebUI on Amazon EKS with Amazon Bedrock</title>
+  <desc id="d">Users reach CloudFront, protected by AWS WAF, which connects through a VPC origin to an internal Application Load Balancer that accepts only CloudFront traffic. The load balancer routes to Open WebUI pods on Amazon EKS. Open WebUI calls the Bedrock Access Gateway, an internal-only service, which calls Amazon Bedrock through VPC endpoints for Claude, GPT, Nova, Llama, Grok and Cohere embeddings. Open WebUI stores data in Aurora PostgreSQL with pgvector through RDS Proxy, shares session state in ElastiCache Valkey, and stores uploads in S3. Amazon Cognito provides single sign-on. CloudWatch, GuardDuty, Security Hub, CloudTrail and automated patching cover operations.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52525B"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#18181B" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .lane { fill: #F4F4F5; }
+      .zone { fill: none; stroke: #D4D4D8; stroke-width: 1; stroke-dasharray: 4 4; }
+      .lane-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; fill: #71717A; }
+      .zone-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; fill: #A1A1AA; }
+      .card { fill: #FFFFFF; stroke: #E4E4E7; stroke-width: 1; filter: url(#shadow); }
+      .title { font-size: 14px; font-weight: 600; fill: #18181B; }
+      .sub { font-size: 11.5px; fill: #71717A; }
+      .chip { fill: #F4F4F5; stroke: #E4E4E7; }
+      .chip-text { font-size: 10.5px; fill: #3F3F46; }
+      .flow { stroke: #52525B; stroke-width: 1.5; fill: none; }
+      .step { fill: #F59E0B; }
+      .step-text { font-size: 10.5px; font-weight: 600; fill: #FFFFFF; }
+    </style>
+  </defs>
+
+  <!-- Lanes -->
+  <rect class="lane" x="12" y="16" width="326" height="452" rx="14"/>
+  <text class="lane-label" x="30" y="40">EDGE · IDENTITY</text>
+  <rect class="lane" x="350" y="16" width="420" height="452" rx="14"/>
+  <text class="lane-label" x="368" y="40">VPC · PRIVATE BY DEFAULT</text>
+  <rect class="lane" x="782" y="16" width="206" height="452" rx="14"/>
+  <text class="lane-label" x="800" y="40">AWS SERVICES</text>
+
+  <!-- Users -->
+  <rect class="card" x="30" y="150" width="104" height="64" rx="10"/>
+  <text class="title" x="46" y="178">Users</text>
+  <text class="sub" x="46" y="197">browser</text>
+
+  <!-- CloudFront -->
+  <rect class="card" x="152" y="110" width="170" height="146" rx="10"/>
+  <rect x="152" y="110" width="5" height="146" rx="2" fill="#8C4FFF"/>
+  <text class="title" x="170" y="136">CloudFront</text>
+  <text class="sub" x="170" y="154">only public entry point</text>
+  <rect class="chip" x="170" y="166" width="136" height="22" rx="6"/><text class="chip-text" x="180" y="181">AWS WAF · rate limits</text>
+  <rect class="chip" x="170" y="194" width="136" height="22" rx="6"/><text class="chip-text" x="180" y="209">ACM · Route 53</text>
+  <rect class="chip" x="170" y="222" width="136" height="22" rx="6"/><text class="chip-text" x="180" y="237">VPC origin (private)</text>
+
+  <!-- Cognito -->
+  <rect class="card" x="30" y="300" width="292" height="84" rx="10"/>
+  <rect x="30" y="300" width="5" height="84" rx="2" fill="#DD344C"/>
+  <text class="title" x="48" y="326">Amazon Cognito</text>
+  <text class="sub" x="48" y="345">OIDC single sign-on, SSO only</text>
+  <text class="sub" x="48" y="363">groups in the token → admin / user roles</text>
+
+  <!-- VPC zones -->
+  <rect class="zone" x="364" y="54" width="392" height="226" rx="10"/>
+  <text class="zone-label" x="376" y="70">PRIVATE SUBNETS · EKS ON GRAVITON</text>
+  <rect class="zone" x="364" y="290" width="392" height="114" rx="10"/>
+  <text class="zone-label" x="376" y="396">DATABASE SUBNETS · NO INTERNET ROUTE</text>
+
+  <!-- ALB -->
+  <rect class="card" x="376" y="80" width="368" height="62" rx="10"/>
+  <rect x="376" y="80" width="5" height="62" rx="2" fill="#8C4FFF"/>
+  <text class="title" x="394" y="104">Internal ALB</text>
+  <text class="sub" x="394" y="124">CloudFront prefix list + origin header · sticky sessions</text>
+
+  <!-- Open WebUI -->
+  <rect class="card" x="376" y="168" width="176" height="98" rx="10"/>
+  <rect x="376" y="168" width="5" height="98" rx="2" fill="#ED7100"/>
+  <text class="title" x="394" y="193">Open WebUI</text>
+  <text class="sub" x="394" y="212">3+ pods · autoscaled</text>
+  <text class="sub" x="394" y="230">disruption budget</text>
+  <text class="sub" x="394" y="248">default-deny network</text>
+
+  <!-- BAG -->
+  <rect class="card" x="568" y="168" width="176" height="98" rx="10"/>
+  <rect x="568" y="168" width="5" height="98" rx="2" fill="#ED7100"/>
+  <text class="title" x="586" y="193">Bedrock Access</text>
+  <text class="title" x="586" y="210">Gateway</text>
+  <text class="sub" x="586" y="230">2+ pods · internal only</text>
+  <text class="sub" x="586" y="248">stateless · bearer key</text>
+
+  <!-- Aurora -->
+  <rect class="card" x="376" y="302" width="176" height="66" rx="10"/>
+  <rect x="376" y="302" width="5" height="66" rx="2" fill="#3B48CC"/>
+  <text class="title" x="394" y="326">Aurora PostgreSQL</text>
+  <text class="sub" x="394" y="345">pgvector · RDS Proxy</text>
+
+  <!-- Valkey -->
+  <rect class="card" x="568" y="302" width="176" height="66" rx="10"/>
+  <rect x="568" y="302" width="5" height="66" rx="2" fill="#3B48CC"/>
+  <text class="title" x="586" y="326">ElastiCache Valkey</text>
+  <text class="sub" x="586" y="345">sessions · websockets · TLS</text>
+
+  <!-- VPC endpoints + NAT -->
+  <rect class="chip" x="568" y="414" width="176" height="44" rx="8"/>
+  <text class="chip-text" x="580" y="432">Bedrock VPC endpoints</text>
+  <text class="chip-text" x="580" y="447">runtime + control plane</text>
+  <rect class="chip" x="376" y="414" width="176" height="44" rx="8"/>
+  <text class="chip-text" x="388" y="432">NAT gateway</text>
+  <text class="chip-text" x="388" y="447">outbound only · web search</text>
+
+  <!-- Bedrock -->
+  <rect class="card" x="800" y="60" width="172" height="220" rx="10"/>
+  <rect x="800" y="60" width="5" height="220" rx="2" fill="#01A88D"/>
+  <text class="title" x="818" y="86">Amazon Bedrock</text>
+  <text class="sub" x="818" y="104">cross-region inference</text>
+  <rect class="chip" x="818" y="116" width="66" height="22" rx="6"/><text class="chip-text" x="828" y="131">Claude</text>
+  <rect class="chip" x="890" y="116" width="66" height="22" rx="6"/><text class="chip-text" x="900" y="131">GPT</text>
+  <rect class="chip" x="818" y="144" width="66" height="22" rx="6"/><text class="chip-text" x="828" y="159">Nova</text>
+  <rect class="chip" x="890" y="144" width="66" height="22" rx="6"/><text class="chip-text" x="900" y="159">Llama</text>
+  <rect class="chip" x="818" y="172" width="66" height="22" rx="6"/><text class="chip-text" x="828" y="187">Grok</text>
+  <rect class="chip" x="890" y="172" width="66" height="22" rx="6"/><text class="chip-text" x="900" y="187">Cohere</text>
+  <text class="sub" x="818" y="220">IAM allow-list is the</text>
+  <text class="sub" x="818" y="238">real model curation</text>
+  <text class="sub" x="818" y="262">Converse · InvokeModel</text>
+
+  <!-- S3 -->
+  <rect class="card" x="800" y="300" width="172" height="84" rx="10"/>
+  <rect x="800" y="300" width="5" height="84" rx="2" fill="#7AA116"/>
+  <text class="title" x="818" y="326">Amazon S3</text>
+  <text class="sub" x="818" y="345">uploads · versioned</text>
+  <text class="sub" x="818" y="363">encrypted · pod IAM role</text>
+
+  <!-- Main request flow -->
+  <path class="flow" d="M134,182 L148,182" marker-end="url(#arrow)"/>
+  <circle class="step" cx="141" cy="168" r="9"/><text class="step-text" x="141" y="172" text-anchor="middle">1</text>
+
+  <path class="flow" d="M322,140 L344,140 L344,111 L372,111" marker-end="url(#arrow)"/>
+  <circle class="step" cx="344" cy="125" r="9"/><text class="step-text" x="344" y="129" text-anchor="middle">2</text>
+
+  <path class="flow" d="M464,142 L464,164" marker-end="url(#arrow)"/>
+  <circle class="step" cx="478" cy="153" r="9"/><text class="step-text" x="478" y="157" text-anchor="middle">3</text>
+
+  <path class="flow" d="M552,217 L564,217" marker-end="url(#arrow)"/>
+  <circle class="step" cx="560" cy="201" r="9"/><text class="step-text" x="560" y="205" text-anchor="middle">4</text>
+
+  <path class="flow" d="M744,217 L796,217" marker-end="url(#arrow)"/>
+  <circle class="step" cx="770" cy="201" r="9"/><text class="step-text" x="770" y="205" text-anchor="middle">5</text>
+
+  <!-- Data flows -->
+  <path class="flow" d="M430,266 L430,298" marker-end="url(#arrow)"/>
+  <path class="flow" d="M510,266 L510,282 L620,282 L620,298" marker-end="url(#arrow)"/>
+
+  <!-- Operations lane -->
+  <rect class="lane" x="12" y="482" width="976" height="142" rx="14"/>
+  <text class="lane-label" x="30" y="506">OPERATE · SECURE · PATCH</text>
+
+  <rect class="card" x="30" y="520" width="226" height="88" rx="10"/>
+  <text class="title" x="48" y="546">Observability</text>
+  <text class="sub" x="48" y="566">CloudWatch dashboards</text>
+  <text class="sub" x="48" y="584">alarms → SNS · VPC flow logs</text>
+
+  <rect class="card" x="270" y="520" width="226" height="88" rx="10"/>
+  <text class="title" x="288" y="546">Threat detection</text>
+  <text class="sub" x="288" y="566">GuardDuty (EKS, S3)</text>
+  <text class="sub" x="288" y="584">Security Hub · CloudTrail</text>
+
+  <rect class="card" x="510" y="520" width="226" height="88" rx="10"/>
+  <text class="title" x="528" y="546">Nightly cluster patching</text>
+  <text class="sub" x="528" y="566">EKS add-ons updated</text>
+  <text class="sub" x="528" y="584">nodes rolled to fresh AMIs</text>
+
+  <rect class="card" x="750" y="520" width="222" height="88" rx="10"/>
+  <text class="title" x="768" y="546">Gateway image pipeline</text>
+  <text class="sub" x="768" y="566">daily rebuild</text>
+  <text class="sub" x="768" y="584">CVE gate before rollout</text>
+</svg>
