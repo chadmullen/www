@@ -1,7 +1,7 @@
 ---
 title: "A Private, Enterprise Open WebUI on AWS: The Full Architecture"
 date: 2026-08-27
-draft: true
+draft: false
 summary: "How I'd deploy Open WebUI for a whole company on AWS: EKS, Aurora with pgvector, ElastiCache, S3, the Bedrock Access Gateway, and every Bedrock model behind one private front door."
 tags: ["AWS", "Bedrock", "Open WebUI", "EKS", "Architecture", "GenAI"]
 ---
